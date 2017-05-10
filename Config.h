@@ -1,0 +1,20 @@
+#ifndef ENG_CONFIG_H
+#define ENG_CONFIG_H
+
+const int UPDATE_RATE   = 60;
+const int UPDATE_DELTA  = 1000 / UPDATE_RATE;
+const int THINK_RATE    = 2;
+const int THINK_DELTA   = 1000 / THINK_RATE;
+const float GRAVITY     = -980.0f;
+
+const int NET_UPDATE_DELTA = 4 * UPDATE_DELTA;
+
+const char THREAD_POOL_KEY[]    = "thread_pool";
+const char STATE_MANAGER_KEY[]  = "state_manager";
+const char INPUT_MANAGER_KEY[]  = "input_manager";
+const char FLOW_CONTROL_KEY[]   = "flow_control";
+
+const char UI_RENDERER_KEY[]    = "ui_renderer";
+const char UI_ROOT_KEY[]        = "ui_root";
+
+#endif // ENG_CONFIG_H

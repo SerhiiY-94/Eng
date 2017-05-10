@@ -1,0 +1,10 @@
+LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := libengine
+LOCAL_CFLAGS += $(GLOBAL_CFLAGS)
+LOCAL_C_INCLUDES += $(GLOBAL_C_INCLUDES)
+LOCAL_SRC_FILES :=  _engine.cpp
+
+include $(BUILD_STATIC_LIBRARY)
