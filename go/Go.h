@@ -26,6 +26,12 @@ public:
     void set_id(const GoID &id) { id_ = id; }
 
     GoComponent *GetComponent(const GoID &id);
+
+    template<typename T>
+    T *GetComponent() {
+        return (T *)GetComponent(T::static_id());
+    }
+
     void AddComponent(GoComponent *c);
     void ClearComponents();
 };

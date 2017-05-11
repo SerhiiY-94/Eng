@@ -4,7 +4,7 @@
 
 #include <Shiny.h>
 
-#include <ren/RenderState.h>
+#include <ren/Context.h>
 #include <sys/Json.h>
 #include <sys/Time_.h>
 #include <sys/ThreadPool.h>
@@ -17,6 +17,10 @@
 
 GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     terminated = false;
+
+    auto ctx = std::make_shared<ren::Context>();
+    ctx->Init(w, h);
+    AddComponent(REN_CONTEXT_KEY, ctx);
 
 #if !defined(__EMSCRIPTEN__)
     size_t num_threads = (size_t)std::max(int(std::thread::hardware_concurrency()) - 1, 1);
@@ -43,7 +47,7 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
 
     JsObject config;
     config[ui::GL_DEFINES_KEY] = "";
-    auto ui_renderer = std::make_shared<ui::Renderer>(config);
+    auto ui_renderer = std::make_shared<ui::Renderer>(config, *ctx.get());
     AddComponent(UI_RENDERER_KEY, ui_renderer);
 
     auto ui_root = std::make_shared<ui::RootElement>(glm::ivec2(w, h));
@@ -57,7 +61,8 @@ GameBase::~GameBase() {
 void GameBase::Resize(int w, int h) {
     width = w; height = h;
 
-    R::Resize(width, height);
+    auto ctx = GetComponent<ren::Context>(REN_CONTEXT_KEY);
+    ctx->Resize(width, height);
 
     auto ui_root = GetComponent<ui::RootElement>(UI_ROOT_KEY);
     ui_root->set_zone({width, height});

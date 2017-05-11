@@ -10,6 +10,9 @@ struct GoAlloc {
     static void Delete(T *p) {
         pool.Delete(p);
     }
+    static void Free(T *p) {
+        pool.Free(p);
+    }
     typedef std::unique_ptr<T, decltype(GoAlloc<T>::Delete)*> Ref;
 
     template<class... Args>
@@ -31,9 +34,10 @@ using GoRef = typename GoAlloc<T>::Ref;
 
 
 #define OVERRIDE_NEW(T)                         \
-    void *operator new(size_t size) {           \
+    template<class... Args>                     \
+    void *operator new(size_t size, Args &&... args) {           \
         assert(size == sizeof(T));              \
-        return GoAlloc<T>::New();               \
+        return GoAlloc<T>::New(args...);        \
     }                                           \
     void *operator new(size_t size, void *pl) { \
         assert(size == sizeof(T));              \
@@ -41,7 +45,7 @@ using GoRef = typename GoAlloc<T>::Ref;
     }                                           \
     void operator delete(void *p) {             \
         if (p) {                                \
-            GoAlloc<T>::Delete((T*)p);          \
+            GoAlloc<T>::Free((T*)p);            \
         }                                       \
     }											\
 	void operator delete(void *p, void *pl) {	\

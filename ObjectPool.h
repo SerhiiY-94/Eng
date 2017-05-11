@@ -80,9 +80,7 @@ public:
 
     void Delete(T *content) {
         content->~T();
-
-        *((T **)content) = first_deleted_;
-        first_deleted_ = content;
+        Free(content);
     }
 
     ////////

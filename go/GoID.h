@@ -13,6 +13,8 @@
 #define CONSTEXPR constexpr
 #endif
 
+#pragma warning(disable : 4307)
+
 template<const uint32_t N, const uint32_t I = 0>
 struct hash_calc {
     static CONSTEXPR uint32_t apply(const char(&s)[N]) {

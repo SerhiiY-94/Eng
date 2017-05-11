@@ -2,6 +2,8 @@
 
 #include <sys/Log.h>
 
+#pragma warning(disable : 4996)
+
 FlowControl::FlowControl(unsigned int bad_delta, unsigned int good_delta) : bad_delta_(bad_delta), good_delta_(good_delta) {
     Reset();
 }
