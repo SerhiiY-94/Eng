@@ -1,5 +1,4 @@
-#ifndef GOCOMPONENT_H
-#define GOCOMPONENT_H
+#pragma once
 
 #include "GoAlloc.h"
 #include "GoID.h"
@@ -27,5 +26,3 @@ public:
     static GoID static_id() {           \
         return GoID((x));               \
     }
-
-#endif // GOCOMPONENT_H

@@ -1,5 +1,4 @@
-#ifndef GOALLOC_H
-#define GOALLOC_H
+#pragma once
 
 #include <memory>
 
@@ -51,7 +50,3 @@ using GoRef = typename GoAlloc<T>::Ref;
 	void operator delete(void *p, void *pl) {	\
 		::operator delete(p, pl);				\
 	}
-
-
-
-#endif // GOALLOC_H

@@ -1,5 +1,4 @@
-#ifndef GAMESTATE_H
-#define GAMESTATE_H
+#pragma once
 
 #include "TimedInput.h"
 
@@ -23,7 +22,3 @@ public:
 
     virtual void HandleInput(InputManager::Event) { };
 };
-
-
-
-#endif /* GAMESTATE_H */

@@ -1,5 +1,4 @@
-#ifndef GAME_RANDOM_H
-#define GAME_RANDOM_H
+#pragma once
 
 #include <glm/vec3.hpp>
 
@@ -10,5 +9,3 @@ namespace Random {
 	float GetMinus1to1Float();
 	glm::vec3 GetNormalizedVec3();
 }
-
-#endif

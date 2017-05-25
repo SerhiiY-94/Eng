@@ -47,7 +47,7 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
 
     JsObject config;
     config[ui::GL_DEFINES_KEY] = "";
-    auto ui_renderer = std::make_shared<ui::Renderer>(config, *ctx.get());
+    auto ui_renderer = std::make_shared<ui::Renderer>(*ctx.get(), config);
     AddComponent(UI_RENDERER_KEY, ui_renderer);
 
     auto ui_root = std::make_shared<ui::RootElement>(glm::ivec2(w, h));

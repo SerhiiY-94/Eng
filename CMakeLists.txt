@@ -5,20 +5,20 @@ add_definitions(-DSHINY_IS_COMPILED=FALSE)
 
 include_directories(../libs/sql/include)
 
-set(SOURCE_FILES	Config.h
-                    FlowControl.h
-                    FlowControl.cpp
-                    FrameInfo.h
-                    GameBase.h
-                    GameBase.cpp
-                    GameState.h
-                    GameStateManager.h
-                    GameStateManager.cpp
-                    ObjectPool.h
-                    Random.h
-                    Random.cpp
-					TimedInput.h
-					TimedInput.cpp)
+set(SOURCE_FILES Config.h
+                 FlowControl.h
+                 FlowControl.cpp
+                 FrameInfo.h
+                 GameBase.h
+                 GameBase.cpp
+                 GameState.h
+                 GameStateManager.h
+                 GameStateManager.cpp
+                 ObjectPool.h
+                 Random.h
+                 Random.cpp
+				 TimedInput.h
+				 TimedInput.cpp)
 
 set(GO_SOURCE_FILES	go/Go.h
                     go/Go.cpp

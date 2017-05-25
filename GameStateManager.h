@@ -1,5 +1,4 @@
-#ifndef GAMESTATEMANAGER_H
-#define GAMESTATEMANAGER_H
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -31,5 +30,3 @@ public:
     void HandleInput(InputManager::Event &);
 };
 
-
-#endif /* GAMESTATEMANAGER_H */

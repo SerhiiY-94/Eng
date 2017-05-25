@@ -1,5 +1,4 @@
-#ifndef GOID_H
-#define GOID_H
+#pragma once
 
 #include <cstdint>
 
@@ -61,5 +60,3 @@ public:
 };
 
 #undef CONSTEXPR
-
-#endif // GOID_H

@@ -1,5 +1,4 @@
-#ifndef ENG_CONFIG_H
-#define ENG_CONFIG_H
+#pragma once
 
 const int UPDATE_RATE   = 60;
 const int UPDATE_DELTA  = 1000 / UPDATE_RATE;
@@ -15,5 +14,3 @@ const char REN_CONTEXT_KEY[]    = "ren_context";
 
 const char UI_RENDERER_KEY[]    = "ui_renderer";
 const char UI_ROOT_KEY[]        = "ui_root";
-
-#endif // ENG_CONFIG_H

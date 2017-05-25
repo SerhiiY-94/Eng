@@ -1,5 +1,4 @@
-#ifndef GAMEINPUT_H
-#define GAMEINPUT_H
+#pragma once
 
 #include <functional>
 #include <memory>
@@ -59,4 +58,3 @@ public:
     void ClearBuffer();
 };
 
-#endif /* GAMEINPUT_H */

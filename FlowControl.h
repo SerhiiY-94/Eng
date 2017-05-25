@@ -1,5 +1,4 @@
-#ifndef FLOWCONTROL_H
-#define FLOWCONTROL_H
+#pragma once
 
 class FlowControl {
     enum Mode {
@@ -22,5 +21,3 @@ public:
         return mode_ == Good ? good_delta_ : bad_delta_;
     }
 };
-
-#endif // FLOWCONTROL_H

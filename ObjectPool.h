@@ -1,5 +1,4 @@
-#ifndef OBJECTPOOL_H
-#define OBJECTPOOL_H
+#pragma once
 
 #include <cstdint>
 
@@ -107,4 +106,3 @@ public:
     }
 };
 
-#endif // OBJECTPOOL_H

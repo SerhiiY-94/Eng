@@ -1,5 +1,4 @@
-#ifndef GAME_BASE_H
-#define GAME_BASE_H
+#pragma once
 
 #include <atomic>
 #include <map>
@@ -41,4 +40,3 @@ public:
     int width, height;
 };
 
-#endif // GAME_BASE_H

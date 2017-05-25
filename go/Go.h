@@ -1,5 +1,4 @@
-#ifndef GO_H
-#define GO_H
+#pragma once
 
 #include "GoID.h"
 
@@ -36,4 +35,3 @@ public:
     void ClearComponents();
 };
 
-#endif // GO_H
