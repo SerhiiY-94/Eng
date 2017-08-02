@@ -2,7 +2,6 @@
 
 #include <random>
 #include <mutex>
-#include <glm/gtx/fast_square_root.hpp>
 
 static std::mt19937 rd((unsigned int) time(0));
 static std::default_random_engine gen(rd());
@@ -30,8 +29,9 @@ float Random::GetMinus1to1Float() {
     return minus_1_to_1_float_distr(gen);
 }
 
-glm::vec3 Random::GetNormalizedVec3() {
-    return glm::fastNormalize(glm::vec3(minus_1_to_1_float_distr(gen),
-                                        minus_1_to_1_float_distr(gen),
-                                        minus_1_to_1_float_distr(gen)));
+math::vec3 Random::GetNormalizedVec3() {
+    return math::normalize_fast(
+            math::vec3{ minus_1_to_1_float_distr(gen),
+                        minus_1_to_1_float_distr(gen),
+                        minus_1_to_1_float_distr(gen) });
 }
