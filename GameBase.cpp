@@ -50,7 +50,7 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     auto ui_renderer = std::make_shared<ui::Renderer>(*ctx.get(), config);
     AddComponent(UI_RENDERER_KEY, ui_renderer);
 
-    auto ui_root = std::make_shared<ui::RootElement>(glm::ivec2(w, h));
+    auto ui_root = std::make_shared<ui::RootElement>(math::ivec2(w, h));
     AddComponent(UI_ROOT_KEY, ui_root);
 }
 
@@ -77,7 +77,7 @@ void GameBase::Start() {
 void GameBase::Frame() {
     auto state_manager = GetComponent<GameStateManager>(STATE_MANAGER_KEY);
     auto input_manager = GetComponent<InputManager>(INPUT_MANAGER_KEY);
-
+    
     PROFILE_FUNC();
 
     static int frame_count = 0;
@@ -120,7 +120,7 @@ void GameBase::Frame() {
     }
 
     fr.time_fract = float(fr.time_acc) / UPDATE_DELTA;
-
+    
     {   PROFILE_BLOCK(Draw);
         state_manager->Draw(0.001f * fr_info_.delta_time);
     }
