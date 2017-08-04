@@ -55,6 +55,7 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
 }
 
 GameBase::~GameBase() {
+    // context should be deleted last
     auto ctx = GetComponent<ren::Context>(REN_CONTEXT_KEY);
     components_.clear();
 }
