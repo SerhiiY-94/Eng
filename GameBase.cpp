@@ -5,6 +5,7 @@
 #include <Shiny.h>
 
 #include <ren/Context.h>
+#include <sys/AssetFileIO.h>
 #include <sys/Json.h>
 #include <sys/Time_.h>
 #include <sys/ThreadPool.h>
@@ -17,6 +18,8 @@
 
 GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     terminated = false;
+
+    sys::InitWorker();
 
     auto ctx = std::make_shared<ren::Context>();
     ctx->Init(w, h);
@@ -58,6 +61,8 @@ GameBase::~GameBase() {
     // context should be deleted last
     auto ctx = GetComponent<ren::Context>(REN_CONTEXT_KEY);
     components_.clear();
+
+    sys::StopWorker();
 }
 
 void GameBase::Resize(int w, int h) {
