@@ -3,6 +3,13 @@ project(engine)
 
 add_definitions(-DSHINY_IS_COMPILED=FALSE)
 
+IF(WIN32)
+
+ELSE(WIN32)
+    set(CMAKE_CXX_STANDARD  11)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+ENDIF(WIN32)
+
 set(SOURCE_FILES Config.h
                  FlowControl.h
                  FlowControl.cpp
