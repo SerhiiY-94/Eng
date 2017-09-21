@@ -3,8 +3,6 @@ project(engine)
 
 add_definitions(-DSHINY_IS_COMPILED=FALSE)
 
-include_directories(../libs/sql/include)
-
 set(SOURCE_FILES Config.h
                  FlowControl.h
                  FlowControl.cpp
@@ -38,6 +36,6 @@ list(APPEND ALL_SOURCE_FILES _engine.cpp)
 source_group("src" FILES _engine.cpp)
 
 add_library(engine STATIC ${ALL_SOURCE_FILES})
-target_link_libraries(engine Shiny sqlite ai net ren sys ui)
+target_link_libraries(engine Shiny ai net ren sys ui)
 
 add_subdirectory(tests)
