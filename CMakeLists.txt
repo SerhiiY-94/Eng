@@ -22,10 +22,10 @@ set(SOURCE_FILES Config.h
                  ObjectPool.h
                  Random.h
                  Random.cpp
-				 TimedInput.h
-				 TimedInput.cpp)
+                 TimedInput.h
+                 TimedInput.cpp)
 
-set(GO_SOURCE_FILES	go/Go.h
+set(GO_SOURCE_FILES go/Go.h
                     go/Go.cpp
                     go/GoAlloc.h
                     go/GoComponent.h

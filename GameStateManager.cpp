@@ -23,7 +23,7 @@ void GameStateManager::Push(const std::shared_ptr<GameState> &state) {
 }
 
 std::shared_ptr<GameState> GameStateManager::Pop() {
-    if(states_.empty()) {
+    if (states_.empty()) {
         throw std::runtime_error("Attempted to pop from an empty game state stack");
     }
 

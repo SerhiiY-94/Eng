@@ -42,10 +42,10 @@ public:
     static_assert(sizeof(T) > sizeof(void *), "Wrong object size!");
 
     explicit ObjectPool(size_t initial_capacity)
-            : first_deleted_(nullptr),
-              first_node_(initial_capacity),
-              node_size_(0),
-              node_capacity_(initial_capacity) {
+        : first_deleted_(nullptr),
+          first_node_(initial_capacity),
+          node_size_(0),
+          node_capacity_(initial_capacity) {
         memory_ = first_node_.memory;
         last_node_ = &first_node_;
     }

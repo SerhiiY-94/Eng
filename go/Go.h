@@ -3,7 +3,7 @@
 #include "GoID.h"
 
 namespace {
-    const int MAX_GO_COMPONENTS = 32;
+const int MAX_GO_COMPONENTS = 32;
 }
 
 class GoComponent;
@@ -21,8 +21,12 @@ public:
     GameObject &operator=(const GameObject &rhs) = delete;
     GameObject &operator=(GameObject &&rhs);
 
-    GoID id() const { return id_; }
-    void set_id(const GoID &id) { id_ = id; }
+    GoID id() const {
+        return id_;
+    }
+    void set_id(const GoID &id) {
+        id_ = id;
+    }
 
     GoComponent *GetComponent(const GoID &id);
 

@@ -3,7 +3,7 @@
 #include <random>
 #include <mutex>
 
-static std::mt19937 rd((unsigned int) time(0));
+static std::mt19937 rd((unsigned int)time(0));
 static std::default_random_engine gen(rd());
 static std::mutex mtx;
 std::uniform_real_distribution<float> n_float_distr(0.0f, 1.0f);
@@ -31,7 +31,7 @@ float Random::GetMinus1to1Float() {
 
 math::vec3 Random::GetNormalizedVec3() {
     return math::normalize_fast(
-            math::vec3{ minus_1_to_1_float_distr(gen),
-                        minus_1_to_1_float_distr(gen),
-                        minus_1_to_1_float_distr(gen) });
+               math::vec3{ minus_1_to_1_float_distr(gen),
+                           minus_1_to_1_float_distr(gen),
+                           minus_1_to_1_float_distr(gen) });
 }

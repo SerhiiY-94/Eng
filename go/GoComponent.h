@@ -15,8 +15,12 @@ public:
 
     virtual GoID id() const = 0;
 
-    GameObject *owner() const { return owner_; }
-    void set_owner(GameObject *go) { owner_ = go; }
+    GameObject *owner() const {
+        return owner_;
+    }
+    void set_owner(GameObject *go) {
+        owner_ = go;
+    }
 };
 
 #define DEF_ID(x)                       \

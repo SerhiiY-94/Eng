@@ -27,9 +27,9 @@ void InputManager::AddRawInputEvent(Event &evt) {
 #if !defined(__EMSCRIPTEN__)
     std::lock_guard<std::mutex> lock(imp_->buffer_mtx);
 #endif
-	if (imp_->input_buffer.size() > 10) {
-		return;
-	}
+    if (imp_->input_buffer.size() > 10) {
+        return;
+    }
     auto conv = imp_->input_converters[evt.type];
     if (conv) {
         conv(evt);

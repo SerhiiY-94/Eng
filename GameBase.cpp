@@ -45,7 +45,7 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     });
     AddComponent(INPUT_MANAGER_KEY, input_manager);
 
-    auto flow_control = std::make_shared<FlowControl>(2*NET_UPDATE_DELTA, NET_UPDATE_DELTA);
+    auto flow_control = std::make_shared<FlowControl>(2 * NET_UPDATE_DELTA, NET_UPDATE_DELTA);
     AddComponent(FLOW_CONTROL_KEY, flow_control);
 
     JsObject config;
@@ -66,13 +66,14 @@ GameBase::~GameBase() {
 }
 
 void GameBase::Resize(int w, int h) {
-    width = w; height = h;
+    width = w;
+    height = h;
 
     auto ctx = GetComponent<ren::Context>(REN_CONTEXT_KEY);
     ctx->Resize(width, height);
 
     auto ui_root = GetComponent<ui::RootElement>(UI_ROOT_KEY);
-    ui_root->set_zone({width, height});
+    ui_root->set_zone({ width, height });
     ui_root->Resize(nullptr);
 }
 
@@ -83,7 +84,7 @@ void GameBase::Start() {
 void GameBase::Frame() {
     auto state_manager = GetComponent<GameStateManager>(STATE_MANAGER_KEY);
     auto input_manager = GetComponent<InputManager>(INPUT_MANAGER_KEY);
-    
+
     PROFILE_FUNC();
 
     static int frame_count = 0;
@@ -102,7 +103,8 @@ void GameBase::Frame() {
 
     sys::cached_time = fr.cur_time - fr.time_acc;
 
-    {   PROFILE_BLOCK(Update);
+    {
+        PROFILE_BLOCK(Update);
         while (fr.time_acc >= UPDATE_DELTA) {
             InputManager::Event evt;
             while (input_manager->PollEvent(sys::cached_time, evt)) {
@@ -126,8 +128,9 @@ void GameBase::Frame() {
     }
 
     fr.time_fract = float(fr.time_acc) / UPDATE_DELTA;
-    
-    {   PROFILE_BLOCK(Draw);
+
+    {
+        PROFILE_BLOCK(Draw);
         state_manager->Draw(0.001f * fr_info_.delta_time);
     }
 

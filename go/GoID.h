@@ -4,10 +4,10 @@
 
 #if defined(_MSC_VER)
 #if _MSC_VER <= 1800
-        #define CONSTEXPR inline
-    #else
-        #define CONSTEXPR constexpr
-    #endif
+#define CONSTEXPR inline
+#else
+#define CONSTEXPR constexpr
+#endif
 #else
 #define CONSTEXPR constexpr
 #endif

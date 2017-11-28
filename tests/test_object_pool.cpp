@@ -5,7 +5,8 @@
 
 void test_object_pool() {
 
-    {   // Test object creation
+    {
+        // Test object creation
         struct A {
             int i, j;
             float f;
@@ -36,7 +37,8 @@ void test_object_pool() {
         assert(a1 == a3);
     }
 
-    {   // Test new node allocation
+    {
+        // Test new node allocation
         struct A {
             int i, j;
             double d1, d2;
@@ -57,7 +59,8 @@ void test_object_pool() {
         pool.Delete(a3);
     }
 
-    {   // ObjectPool test
+    {
+        // ObjectPool test
         struct A {
             int i, j;
             double d1, d2;

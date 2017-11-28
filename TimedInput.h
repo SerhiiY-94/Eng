@@ -19,8 +19,8 @@ public:
         RAW_INPUT_BUTTON_SHIFT,
         RAW_INPUT_BUTTON_DELETE,
         RAW_INPUT_BUTTON_TAB,
-		RAW_INPUT_BUTTON_SPACE,
-		RAW_INPUT_BUTTON_OTHER,
+        RAW_INPUT_BUTTON_SPACE,
+        RAW_INPUT_BUTTON_OTHER,
     };
 
     enum RawInputEvent {
@@ -40,7 +40,7 @@ public:
     struct Event {
         RawInputEvent type;
         RawInputButton key;
-		int raw_key;
+        int raw_key;
         struct {
             float x, y;
         } point;
