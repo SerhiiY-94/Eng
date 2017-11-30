@@ -28,7 +28,7 @@ GameObject &GameObject::operator=(GameObject &&rhs) {
 
 GameObject::~GameObject() {
     ClearComponents();
-    id_ = 0;
+	id_ = 0;
 }
 
 GoComponent *GameObject::GetComponent(const GoID &id) {

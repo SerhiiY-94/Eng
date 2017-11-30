@@ -43,7 +43,7 @@ void test_object_pool() {
             int i, j;
             double d1, d2;
 
-            A(int _i) : i(_i), j(_i), d1(_i), d2(_i) {}
+            explicit A(int _i) : i(_i), j(_i), d1(_i), d2(_i) {}
         };
 
         ObjectPool<A> pool(2);
@@ -65,7 +65,7 @@ void test_object_pool() {
             int i, j;
             double d1, d2;
 
-            A(int _i) : i(_i), j(_i), d1(_i), d2(_i) {}
+            explicit A(int _i) : i(_i), j(_i), d1(_i), d2(_i) {}
         };
 
         A *a1 = GoAlloc<A>::New(1);

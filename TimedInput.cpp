@@ -19,7 +19,7 @@ InputManager::~InputManager() {
     delete imp_;
 }
 
-void InputManager::SetConverter(RawInputEvent evt_type, std::function<void(Event &)> conv) {
+void InputManager::SetConverter(RawInputEvent evt_type, const std::function<void(Event &)> &conv) {
     imp_->input_converters[evt_type] = conv;
 }
 

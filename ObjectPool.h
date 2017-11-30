@@ -11,7 +11,7 @@ class ObjectPool {
         size_t capacity;
         Node *next;
 
-        Node(size_t cap) : capacity(cap), next(nullptr) {
+        explicit Node(size_t cap) : capacity(cap), next(nullptr) {
             memory = (T *)::operator new(capacity * sizeof(T));
         }
         ~Node() {

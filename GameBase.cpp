@@ -119,7 +119,7 @@ void GameBase::Frame() {
     }
 
     if (fps_time_acc > 1000) {
-        int fps = frame_count;
+        //int fps = frame_count;
         frame_count = 0;
         //if (sc_) {
         //    sc_->SetCVAR("r_fps", (double) fps);

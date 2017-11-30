@@ -52,8 +52,10 @@ public:
 
     InputManager();
     ~InputManager();
+	InputManager(const InputManager &) = delete;
+	InputManager &operator=(const InputManager &) = delete;
 
-    void SetConverter(RawInputEvent evt_type, std::function<void(Event &)> conv);
+    void SetConverter(RawInputEvent evt_type, const std::function<void(Event &)> &conv);
     void AddRawInputEvent(Event &evt);
     bool PollEvent(unsigned int time, Event &evt);
     void ClearBuffer();
