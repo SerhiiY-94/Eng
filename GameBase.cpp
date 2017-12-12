@@ -87,8 +87,6 @@ void GameBase::Frame() {
 
     PROFILE_FUNC();
 
-    static int frame_count = 0;
-    static int fps_time_acc = 0;
     FrameInfo &fr = fr_info_;
 
     fr.cur_time = sys::GetTicks();
@@ -99,7 +97,6 @@ void GameBase::Frame() {
     }
     fr.prev_time = fr.cur_time;
     fr.time_acc += fr.delta_time;
-    fps_time_acc += fr.delta_time;
 
     sys::cached_time = fr.cur_time - fr.time_acc;
 
@@ -118,23 +115,12 @@ void GameBase::Frame() {
         }
     }
 
-    if (fps_time_acc > 1000) {
-        //int fps = frame_count;
-        frame_count = 0;
-        //if (sc_) {
-        //    sc_->SetCVAR("r_fps", (double) fps);
-        //}
-        fps_time_acc -= 1000;
-    }
-
     fr.time_fract = float(fr.time_acc) / UPDATE_DELTA;
 
     {
         PROFILE_BLOCK(Draw);
         state_manager->Draw(0.001f * fr_info_.delta_time);
     }
-
-    frame_count++;
 }
 
 void GameBase::Quit() {
