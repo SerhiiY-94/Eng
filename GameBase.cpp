@@ -1,5 +1,6 @@
 #include "GameBase.h"
 
+#include <random>
 #include <thread>
 
 #include <Shiny.h>
@@ -11,10 +12,11 @@
 #include <sys/ThreadPool.h>
 #include <ui/BaseElement.h>
 #include <ui/Renderer.h>
+#include <random>
 
 #include "FlowControl.h"
 #include "GameStateManager.h"
-#include "TimedInput.h"
+#include "Random.h"
 
 GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     terminated = false;
@@ -47,6 +49,9 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
 
     auto flow_control = std::make_shared<FlowControl>(2 * NET_UPDATE_DELTA, NET_UPDATE_DELTA);
     AddComponent(FLOW_CONTROL_KEY, flow_control);
+
+    auto random_engine = std::make_shared<Random>(std::random_device{}());
+    AddComponent(RANDOM_KEY, random_engine);
 
     JsObject config;
     config[ui::GL_DEFINES_KEY] = "";

@@ -1,37 +1,46 @@
 #include "Random.h"
 
 #include <random>
-#include <mutex>
 
-static std::mt19937 rd((unsigned int)time(0));
-static std::default_random_engine gen(rd());
-static std::mutex mtx;
-std::uniform_real_distribution<float> n_float_distr(0.0f, 1.0f);
-std::uniform_real_distribution<float> minus_1_to_1_float_distr(-1.0f, 1.0f);
+class Random_Impl {
+public:
+    std::mt19937 gen;
+    std::uniform_real_distribution<float> n_float_distr;
+    std::uniform_real_distribution<float> minus_1_to_1_float_distr;
+    std::uniform_real_distribution<double> n_double_distr;
+
+    explicit Random_Impl(uint32_t seed)
+            : gen(seed), n_float_distr{ 0, 1 }, minus_1_to_1_float_distr{ -1, 1 },
+              n_double_distr{ 0, 1 } {}
+};
+
+Random::Random(uint32_t seed) {
+    impl_.reset(new Random_Impl(seed));
+}
 
 int Random::GetInt(int min, int max) {
-    std::lock_guard<std::mutex> lck(mtx);
-    std::uniform_int_distribution<int> distr(min, max);
-    return distr(gen);
+    return std::uniform_int_distribution<int>{ min, max }(impl_->gen);
 }
 
 float Random::GetFloat(float min, float max) {
-    std::lock_guard<std::mutex> lck(mtx);
-    std::uniform_real_distribution<float> distr(min, max);
-    return distr(gen);
+    return std::uniform_real_distribution<float>{ min, max }(impl_->gen);
 }
 
 float Random::GetNormalizedFloat() {
-    return n_float_distr(gen);
+    return impl_->n_float_distr(impl_->gen);
 }
 
 float Random::GetMinus1to1Float() {
-    return minus_1_to_1_float_distr(gen);
+    return impl_->minus_1_to_1_float_distr(impl_->gen);
 }
 
 math::vec3 Random::GetNormalizedVec3() {
     return math::normalize_fast(
-               math::vec3{ minus_1_to_1_float_distr(gen),
-                           minus_1_to_1_float_distr(gen),
-                           minus_1_to_1_float_distr(gen) });
+               { impl_->minus_1_to_1_float_distr(impl_->gen),
+                 impl_->minus_1_to_1_float_distr(impl_->gen),
+                 impl_->minus_1_to_1_float_distr(impl_->gen) });
+}
+
+double Random::GetNormalizedDouble() {
+    return impl_->n_double_distr(impl_->gen);
 }

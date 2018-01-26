@@ -11,6 +11,7 @@ const char STATE_MANAGER_KEY[] = "state_manager";
 const char INPUT_MANAGER_KEY[] = "input_manager";
 const char FLOW_CONTROL_KEY[] = "flow_control";
 const char REN_CONTEXT_KEY[] = "ren_context";
+const char RANDOM_KEY[] = "random_eng";
 
 const char UI_RENDERER_KEY[] = "ui_renderer";
 const char UI_ROOT_KEY[] = "ui_root";
