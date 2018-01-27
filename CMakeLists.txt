@@ -43,6 +43,6 @@ list(APPEND ALL_SOURCE_FILES _engine.cpp)
 source_group("src" FILES _engine.cpp)
 
 add_library(engine STATIC ${ALL_SOURCE_FILES})
-target_link_libraries(engine Shiny ren sys ui)
+target_link_libraries(engine ren sys ui)
 
 add_subdirectory(tests)

@@ -3,8 +3,6 @@
 #include <random>
 #include <thread>
 
-#include <Shiny.h>
-
 #include <ren/Context.h>
 #include <sys/AssetFileIO.h>
 #include <sys/Json.h>
@@ -90,7 +88,7 @@ void GameBase::Frame() {
     auto state_manager = GetComponent<GameStateManager>(STATE_MANAGER_KEY);
     auto input_manager = GetComponent<InputManager>(INPUT_MANAGER_KEY);
 
-    PROFILE_FUNC();
+    //PROFILE_FUNC();
 
     FrameInfo &fr = fr_info_;
 
@@ -106,7 +104,7 @@ void GameBase::Frame() {
     sys::cached_time = fr.cur_time - fr.time_acc;
 
     {
-        PROFILE_BLOCK(Update);
+        //PROFILE_BLOCK(Update);
         while (fr.time_acc >= UPDATE_DELTA) {
             InputManager::Event evt;
             while (input_manager->PollEvent(sys::cached_time, evt)) {
@@ -123,7 +121,7 @@ void GameBase::Frame() {
     fr.time_fract = float(fr.time_acc) / UPDATE_DELTA;
 
     {
-        PROFILE_BLOCK(Draw);
+        //PROFILE_BLOCK(Draw);
         state_manager->Draw(0.001f * fr_info_.delta_time);
     }
 }
