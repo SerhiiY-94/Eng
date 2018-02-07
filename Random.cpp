@@ -10,8 +10,8 @@ public:
     std::uniform_real_distribution<double> n_double_distr;
 
     explicit Random_Impl(uint32_t seed)
-            : gen(seed), n_float_distr{ 0, 1 }, minus_1_to_1_float_distr{ -1, 1 },
-              n_double_distr{ 0, 1 } {}
+        : gen(seed), n_float_distr{ 0, 1 }, minus_1_to_1_float_distr{ -1, 1 },
+          n_double_distr{ 0, 1 } {}
 };
 
 Random::Random(uint32_t seed) {
@@ -19,11 +19,11 @@ Random::Random(uint32_t seed) {
 }
 
 int Random::GetInt(int min, int max) {
-    return std::uniform_int_distribution<int>{ min, max }(impl_->gen);
+    return std::uniform_int_distribution<int> { min, max }(impl_->gen);
 }
 
 float Random::GetFloat(float min, float max) {
-    return std::uniform_real_distribution<float>{ min, max }(impl_->gen);
+    return std::uniform_real_distribution<float> { min, max }(impl_->gen);
 }
 
 float Random::GetNormalizedFloat() {
@@ -35,10 +35,11 @@ float Random::GetMinus1to1Float() {
 }
 
 math::vec3 Random::GetNormalizedVec3() {
-    return math::normalize_fast(
-               { impl_->minus_1_to_1_float_distr(impl_->gen),
-                 impl_->minus_1_to_1_float_distr(impl_->gen),
-                 impl_->minus_1_to_1_float_distr(impl_->gen) });
+    return math::normalize_fast( {
+        impl_->minus_1_to_1_float_distr(impl_->gen),
+        impl_->minus_1_to_1_float_distr(impl_->gen),
+        impl_->minus_1_to_1_float_distr(impl_->gen)
+    });
 }
 
 double Random::GetNormalizedDouble() {

@@ -52,8 +52,8 @@ public:
 
     InputManager();
     ~InputManager();
-	InputManager(const InputManager &) = delete;
-	InputManager &operator=(const InputManager &) = delete;
+    InputManager(const InputManager &) = delete;
+    InputManager &operator=(const InputManager &) = delete;
 
     void SetConverter(RawInputEvent evt_type, const std::function<void(Event &)> &conv);
     void AddRawInputEvent(Event &evt);
