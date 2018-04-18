@@ -10,6 +10,8 @@ class GameState;
 
 class GameStateManager {
     std::vector<std::shared_ptr<GameState>> states_;
+
+    bool pop_later_ = false;
 public:
     virtual ~GameStateManager();
 
@@ -18,6 +20,8 @@ public:
     void Push(const std::shared_ptr<GameState> &state);
 
     std::shared_ptr<GameState> Pop();
+
+    void PopLater();
 
     std::shared_ptr<GameState> Switch(const std::shared_ptr<GameState> &state);
 

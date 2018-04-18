@@ -37,6 +37,10 @@ std::shared_ptr<GameState> GameStateManager::Pop() {
     return popped;
 }
 
+void GameStateManager::PopLater() {
+    pop_later_ = true;
+}
+
 std::shared_ptr<GameState> GameStateManager::Switch(const std::shared_ptr<GameState> &state) {
     std::shared_ptr<GameState> current_state = Peek();
     if (current_state) {
@@ -53,6 +57,11 @@ void GameStateManager::Clear() {
 }
 
 void GameStateManager::Update(int dt_ms) {
+    if (pop_later_) {
+        Pop();
+        pop_later_ = false;
+    }
+
     auto &st = states_.back();
     st->Update(dt_ms);
 }
