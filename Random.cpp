@@ -34,8 +34,8 @@ float Random::GetMinus1to1Float() {
     return impl_->minus_1_to_1_float_distr(impl_->gen);
 }
 
-math::vec3 Random::GetNormalizedVec3() {
-    return math::normalize_fast( {
+Ren::Vec3f Random::GetNormalizedVec3() {
+    return Ren::Normalize( Ren::Vec3f{
         impl_->minus_1_to_1_float_distr(impl_->gen),
         impl_->minus_1_to_1_float_distr(impl_->gen),
         impl_->minus_1_to_1_float_distr(impl_->gen)

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.4)
-project(engine)
+project(Eng)
 
 add_definitions(-DSHINY_IS_COMPILED=FALSE)
 
@@ -39,10 +39,10 @@ list(APPEND ALL_SOURCE_FILES ${GO_SOURCE_FILES})
 set_source_files_properties(${GO_SOURCE_FILES} PROPERTIES HEADER_FILE_ONLY TRUE)
 source_group("src\\go" FILES ${GO_SOURCE_FILES})
 
-list(APPEND ALL_SOURCE_FILES _engine.cpp)
-source_group("src" FILES _engine.cpp)
+list(APPEND ALL_SOURCE_FILES _Eng.cpp)
+source_group("src" FILES _Eng.cpp)
 
-add_library(engine STATIC ${ALL_SOURCE_FILES})
-target_link_libraries(engine ren sys ui)
+add_library(Eng STATIC ${ALL_SOURCE_FILES})
+target_link_libraries(Eng Gui Ren Sys)
 
 add_subdirectory(tests)

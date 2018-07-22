@@ -3,14 +3,13 @@
 #include <random>
 #include <thread>
 
-#include <ren/Context.h>
-#include <sys/AssetFileIO.h>
-#include <sys/Json.h>
-#include <sys/Time_.h>
-#include <sys/ThreadPool.h>
-#include <ui/BaseElement.h>
-#include <ui/Renderer.h>
-#include <random>
+#include <Gui/BaseElement.h>
+#include <Gui/Renderer.h>
+#include <Ren/Context.h>
+#include <Sys/AssetFileIO.h>
+#include <Sys/Json.h>
+#include <Sys/Time_.h>
+#include <Sys/ThreadPool.h>
 
 #include "FlowControl.h"
 #include "GameStateManager.h"
@@ -19,15 +18,15 @@
 GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     terminated = false;
 
-    sys::InitWorker();
+    Sys::InitWorker();
 
-    auto ctx = std::make_shared<ren::Context>();
+    auto ctx = std::make_shared<Ren::Context>();
     ctx->Init(w, h);
     AddComponent(REN_CONTEXT_KEY, ctx);
 
 #if !defined(__EMSCRIPTEN__)
     auto num_threads = std::max(std::thread::hardware_concurrency(), 1u);
-    auto pool = std::make_shared<sys::ThreadPool>(num_threads);
+    auto pool = std::make_shared<Sys::ThreadPool>(num_threads);
     AddComponent(THREAD_POOL_KEY, pool);
 #endif
 
@@ -52,30 +51,30 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     AddComponent(RANDOM_KEY, random_engine);
 
     JsObject config;
-    config[ui::GL_DEFINES_KEY] = "";
-    auto ui_renderer = std::make_shared<ui::Renderer>(*ctx.get(), config);
+    config[Gui::GL_DEFINES_KEY] = "";
+    auto ui_renderer = std::make_shared<Gui::Renderer>(*ctx.get(), config);
     AddComponent(UI_RENDERER_KEY, ui_renderer);
 
-    auto ui_root = std::make_shared<ui::RootElement>(math::ivec2(w, h));
+    auto ui_root = std::make_shared<Gui::RootElement>(Gui::Vec2i(w, h));
     AddComponent(UI_ROOT_KEY, ui_root);
 }
 
 GameBase::~GameBase() {
     // context should be deleted last
-    auto ctx = GetComponent<ren::Context>(REN_CONTEXT_KEY);
+    auto ctx = GetComponent<Ren::Context>(REN_CONTEXT_KEY);
     components_.clear();
 
-    sys::StopWorker();
+    Sys::StopWorker();
 }
 
 void GameBase::Resize(int w, int h) {
     width = w;
     height = h;
 
-    auto ctx = GetComponent<ren::Context>(REN_CONTEXT_KEY);
+    auto ctx = GetComponent<Ren::Context>(REN_CONTEXT_KEY);
     ctx->Resize(width, height);
 
-    auto ui_root = GetComponent<ui::RootElement>(UI_ROOT_KEY);
+    auto ui_root = GetComponent<Gui::RootElement>(UI_ROOT_KEY);
     ui_root->set_zone({ width, height });
     ui_root->Resize(nullptr);
 }
@@ -92,7 +91,7 @@ void GameBase::Frame() {
 
     FrameInfo &fr = fr_info_;
 
-    fr.cur_time = sys::GetTicks();
+    fr.cur_time = Sys::GetTicks();
     if (fr.cur_time < fr.prev_time)fr.prev_time = 0;
     fr.delta_time = fr.cur_time - fr.prev_time;
     if (fr.delta_time > 200) {
@@ -101,20 +100,20 @@ void GameBase::Frame() {
     fr.prev_time = fr.cur_time;
     fr.time_acc += fr.delta_time;
 
-    sys::cached_time = fr.cur_time - fr.time_acc;
+    Sys::cached_time = fr.cur_time - fr.time_acc;
 
     {
         //PROFILE_BLOCK(Update);
         while (fr.time_acc >= UPDATE_DELTA) {
             InputManager::Event evt;
-            while (input_manager->PollEvent(sys::cached_time, evt)) {
+            while (input_manager->PollEvent(Sys::cached_time, evt)) {
                 state_manager->HandleInput(evt);
             }
 
             state_manager->Update(UPDATE_DELTA);
             fr.time_acc -= UPDATE_DELTA;
 
-            sys::cached_time += UPDATE_DELTA;
+            Sys::cached_time += UPDATE_DELTA;
         }
     }
 

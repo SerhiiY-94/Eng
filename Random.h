@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math/vec3.hpp>
+#include <Ren/MVec.h>
 
 class Random_Impl;
 
@@ -14,7 +14,7 @@ public:
     float GetFloat(float min, float max);
     float GetNormalizedFloat();
     float GetMinus1to1Float();
-    math::vec3 GetNormalizedVec3();
+    Ren::Vec3f GetNormalizedVec3();
 
     double GetNormalizedDouble();
 };
