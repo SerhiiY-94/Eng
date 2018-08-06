@@ -34,6 +34,7 @@ public:
         RAW_INPUT_KEY_DOWN,
         RAW_INPUT_KEY_UP,
         RAW_INPUT_RESIZE,
+        RAW_INPUT_MOUSE_WHEEL,
         NUM_EVENTS
     };
 
