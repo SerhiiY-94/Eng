@@ -3,7 +3,7 @@
 #include "GoAlloc.h"
 #include "GoID.h"
 
-#include <ren/SparseArray.h>
+#include <Ren/SparseArray.h>
 
 class GameObject;
 
