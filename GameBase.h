@@ -1,22 +1,30 @@
 #pragma once
 
 #include <atomic>
+#include <functional>
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "Config.h"
 #include "FrameInfo.h"
 
+using CommandHandler = std::function<bool(const std::vector<std::string> &)>;
+
 class GameBase {
 protected:
     std::map<std::string, std::shared_ptr<void>> components_;
+    std::map<std::string, CommandHandler> command_handers_;
     FrameInfo fr_info_;
 public:
     GameBase(int w, int h, const char *local_dir);
     virtual ~GameBase();
 
     virtual void Resize(int w, int h);
+
+    virtual void RegisterCommand(const std::string &cmd, const CommandHandler &handler);
+    virtual bool ExecuteCommand(const std::string &cmd, const std::vector<std::string> &args);
 
     void Start();
     void Frame();
