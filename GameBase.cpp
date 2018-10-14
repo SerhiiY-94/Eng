@@ -34,14 +34,6 @@ GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
     AddComponent(STATE_MANAGER_KEY, state_manager);
 
     auto input_manager = std::make_shared<InputManager>();
-    input_manager->SetConverter(InputManager::RAW_INPUT_P1_MOVE, [w, h](InputManager::Event &evt) {
-        evt.move.dx *= 100.0f / w;
-        evt.move.dy *= 100.0f / w;
-    });
-    input_manager->SetConverter(InputManager::RAW_INPUT_P2_MOVE, [w, h](InputManager::Event &evt) {
-        evt.move.dx *= 100.0f / w;
-        evt.move.dy *= 100.0f / w;
-    });
     AddComponent(INPUT_MANAGER_KEY, input_manager);
 
     auto flow_control = std::make_shared<FlowControl>(2 * NET_UPDATE_DELTA, NET_UPDATE_DELTA);
