@@ -1,14 +1,10 @@
 #include "TimedInput.h"
 
 #include <queue>
-#include <mutex>
 
 struct InputManagerImp {
     std::function<void(InputManager::Event &)> input_converters[InputManager::NUM_EVENTS];
     std::queue<InputManager::Event> input_buffer;
-#if !defined(__EMSCRIPTEN__)
-    std::mutex buffer_mtx;
-#endif
 };
 
 InputManager::InputManager() {
@@ -24,9 +20,6 @@ void InputManager::SetConverter(RawInputEvent evt_type, const std::function<void
 }
 
 void InputManager::AddRawInputEvent(Event &evt) {
-#if !defined(__EMSCRIPTEN__)
-    std::lock_guard<std::mutex> lock(imp_->buffer_mtx);
-#endif
     if (imp_->input_buffer.size() > 10) {
         return;
     }
@@ -38,9 +31,6 @@ void InputManager::AddRawInputEvent(Event &evt) {
 }
 
 bool InputManager::PollEvent(unsigned int time, Event &evt) {
-#if !defined(__EMSCRIPTEN__)
-    std::lock_guard<std::mutex> lock(imp_->buffer_mtx);
-#endif
     if (imp_->input_buffer.empty()) {
         return false;
     } else {
@@ -55,9 +45,6 @@ bool InputManager::PollEvent(unsigned int time, Event &evt) {
 }
 
 void InputManager::ClearBuffer() {
-#if !defined(__EMSCRIPTEN__)
-    std::lock_guard<std::mutex> lock(imp_->buffer_mtx);
-#endif
     while (imp_->input_buffer.size()) {
         imp_->input_buffer.pop();
     }
