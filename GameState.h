@@ -6,18 +6,16 @@ class GameState {
 public:
     virtual ~GameState() {}
 
-    //Вызавается каждый раз при возвращении
-    //в это состояние
+    // Call every time we enter this state
     virtual void Enter() {};
 
-    //Вызавается каждый раз при выходе
-    //из этого состояния
+    // Call every time we exit this state
     virtual void Exit() {};
 
-    //Рисование
+    // Drawing
     virtual void Draw(float dt_s) {};
 
-    //Вызавается UPDATE_RATE раз в секунду (обычно 60)
+    // Called UPDATE_RATE times per second (usually 60)
     virtual void Update(int dt_ms) {};
 
     virtual void HandleInput(InputManager::Event) {};
