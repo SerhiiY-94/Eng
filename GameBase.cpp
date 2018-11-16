@@ -15,7 +15,7 @@
 #include "GameStateManager.h"
 #include "Random.h"
 
-GameBase::GameBase(int w, int h, const char *local_dir) : width(w), height(h) {
+GameBase::GameBase(int w, int h, const char * /*local_dir*/) : width(w), height(h) {
     terminated = false;
 
     Sys::InitWorker();
