@@ -28,10 +28,10 @@ GameObject &GameObject::operator=(GameObject &&rhs) {
 
 GameObject::~GameObject() {
     ClearComponents();
-    id_ = 0;
+    id_ = GoID{ 0 };
 }
 
-GoComponent *GameObject::GetComponent(const GoID &id) {
+GoComponent *GameObject::GetComponent(const GoID &id) const {
     for (int i = 0; i < num_components_; i++) {
         if (components_[i]->id() == id) {
             return components_[i];

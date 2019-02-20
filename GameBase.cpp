@@ -43,7 +43,7 @@ GameBase::GameBase(int w, int h, const char * /*local_dir*/) : width(w), height(
     AddComponent(RANDOM_KEY, random_engine);
 
     JsObject config;
-    config[Gui::GL_DEFINES_KEY] = "";
+    config[Gui::GL_DEFINES_KEY] = JsString{ "" };
     auto ui_renderer = std::make_shared<Gui::Renderer>(*ctx.get(), config);
     AddComponent(UI_RENDERER_KEY, ui_renderer);
 

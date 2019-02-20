@@ -13,7 +13,7 @@ class GameObject {
     GoComponent *components_[MAX_GO_COMPONENTS];
     int num_components_;
 public:
-    GameObject(const GoID &id) : id_(id), num_components_(0) {}
+    explicit GameObject(const GoID &id) : id_(id), num_components_(0) {}
     GameObject(const GameObject &rhs) = delete;
     GameObject(GameObject &&rhs);
     ~GameObject();
@@ -28,11 +28,11 @@ public:
         id_ = id;
     }
 
-    GoComponent *GetComponent(const GoID &id);
+    GoComponent *GetComponent(const GoID &id) const;
 
     template<typename T>
     T *GetComponent() {
-        return (T *)GetComponent(T::static_id());
+        return reinterpret_cast<T *>(GetComponent(T::static_id()));
     }
 
     void AddComponent(GoComponent *c);
